@@ -8,7 +8,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class SendInfoCommand implements ICommand {
 
-    public static void send(MessageReceivedEvent event) {
+    @Override
+    public void execute(MessageReceivedEvent event) {
         val author = event.getAuthor();
         val info = new EmbedBuilder();
 

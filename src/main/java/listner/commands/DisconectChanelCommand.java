@@ -13,7 +13,8 @@ public class DisconectChanelCommand implements ICommand {
 
     private static final Logger logger = LoggerFactory.getLogger(DisconectChanelCommand.class);
 
-    public static void disconect (MessageReceivedEvent event) {
+    @Override
+    public void execute(MessageReceivedEvent event) {
         val self = event.getGuild().getSelfMember();
 
         if (!Objects.requireNonNull(self.getVoiceState()).inAudioChannel()) {

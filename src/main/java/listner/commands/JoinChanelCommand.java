@@ -13,7 +13,7 @@ public class JoinChanelCommand implements ICommand {
 
     private static final Logger logger = LoggerFactory.getLogger(JoinChanelCommand.class);
 
-    public static void join (MessageReceivedEvent event) {
+    public void execute (MessageReceivedEvent event) {
         val self = event.getGuild().getSelfMember();
 
         if (Objects.requireNonNull(self.getVoiceState()).inAudioChannel()) {

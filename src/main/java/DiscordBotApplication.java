@@ -13,8 +13,7 @@ public class DiscordBotApplication {
                 .setActivity(Activity.watching("Minha vida (e n\u00E3o faz sentido)"))
                 .build();
 
-        bot.addEventListener(new ManagerCommand());
+        bot.addEventListener(ManagerCommand.getInstance());
         bot.addEventListener(new SendVoiceMessage());
-
     }
 }

@@ -15,9 +15,9 @@ public interface ICommandManager {
 
     Set<String> allCommandsAndHelp();
 
-    Set<ICommand> allCommandsClassess();
+    Set<ICommand> allCommandsClasses();
 
-    static Set<ICommand> instantiateAllCommandsClass() {
+    static Set<ICommand> instantiateAllCommandsClasses() {
         return new HashSet<>(Arrays.asList(
             new HelpCommand(),
             new SendInfoCommand(),

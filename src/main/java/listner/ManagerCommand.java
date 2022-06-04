@@ -27,7 +27,7 @@ public class ManagerCommand extends ListenerAdapter implements ICommandManager {
 
     public static ManagerCommand getInstance() {
         if (instance == null ) {
-            instance = new ManagerCommand(ICommandManager.instantiateAllCommandsClass());
+            instance = new ManagerCommand(ICommandManager.instantiateAllCommandsClasses());
         }
         return instance;
     }
@@ -37,7 +37,7 @@ public class ManagerCommand extends ListenerAdapter implements ICommandManager {
     public void onMessageReceived(MessageReceivedEvent event) {
         val args = event.getMessage().getContentRaw().split("\\s+");
 
-        allCommandsClassess().forEach(clazz -> {
+        allCommandsClasses().forEach(clazz -> {
             if (prefixCommand(clazz.command()).equalsIgnoreCase(args[0])) {
                 clazz.execute(event);
             }
@@ -50,7 +50,7 @@ public class ManagerCommand extends ListenerAdapter implements ICommandManager {
 
     @Override
     public Set<String> allCommands() {
-        return this.allCommandsClassess().stream().map(ICommand::command)
+        return this.allCommandsClasses().stream().map(ICommand::command)
                 .collect(Collectors.toSet());
     }
 
@@ -58,14 +58,14 @@ public class ManagerCommand extends ListenerAdapter implements ICommandManager {
     public Set<String> allCommandsAndHelp() {
         val list = new HashSet<String>();
 
-         for (val controller : allCommandsClassess()) {
+         for (val controller : allCommandsClasses()) {
              list.add(String.format("%s: %s \n", this.prefixCommand(controller.command()), controller.help()));
          }
         return list;
     }
 
     @Override
-    public Set<ICommand> allCommandsClassess() {
+    public Set<ICommand> allCommandsClasses() {
         return Objects.requireNonNullElse(this.commandsClasses, new HashSet<>());
     }
 

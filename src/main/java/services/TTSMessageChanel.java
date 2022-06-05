@@ -14,6 +14,8 @@ public class TTSMessageChanel {
     }
 
     public static String getTTSChanelId(String serverId) {
-        return TTSChanelId.get(serverId);
+        synchronized (TTSMessageChanel.class) {
+            return TTSChanelId.get(serverId);
+        }
     }
 }

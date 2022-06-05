@@ -8,8 +8,6 @@ public class DiscordBotConstants {
 
     public static final String ENV_BOT_TOKEN     = "BOT_TOKEN";
 
-    public static final String GENERAL_CHANEL_ID = "981352428920262676";
-
     /*Commands*/
     public static final String OUT  = "out";
     public static final String INFO = "info";

@@ -6,6 +6,7 @@ import lombok.val;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import services.TTSMessageChanel;
 
 import java.util.Objects;
 
@@ -15,6 +16,7 @@ public class JoinChanelCommand implements ICommand {
 
     public void execute (MessageReceivedEvent event) {
         val self = event.getGuild().getSelfMember();
+        TTSMessageChanel.setTTSChanel(event.getGuild().getId(), event.getChannel().getId());
 
         if (Objects.requireNonNull(self.getVoiceState()).inAudioChannel()) {
             event.getChannel().sendTyping().queue();

@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import services.TTSMessageChanel;
 
 import java.util.Objects;
 
@@ -18,10 +19,10 @@ public class SendVoiceMessage extends ListenerAdapter {
         val lastJoiner = event.getMember();
         val chanelJoined = event.getChannelJoined().getName();
 
-        val general = event.getGuild().getTextChannelById(DiscordBotConstants.GENERAL_CHANEL_ID);
+        val TTSChanel = event.getGuild().getTextChannelById(new TTSMessageChanel().getTTSChanelId(event.getGuild().getId()));
 
-        if (Objects.isNull(general)) {
-            logger.error("Bot n\u00E3o conseguiu recuperar o canal General, id pesquisado: {}", DiscordBotConstants.GENERAL_CHANEL_ID);
+        if (Objects.isNull(TTSChanel)) {
+            logger.error("Bot n\u00E3o conseguiu recuperar o canal para enviar mensagens TTS, id pesquisado");
             return;
         }
 
@@ -42,11 +43,11 @@ public class SendVoiceMessage extends ListenerAdapter {
         }
 
         if (DiscordBotConstants.FOOLS_DISCRIMINATORS.contains(lastJoiner.getUser().getDiscriminator())) {
-            general.sendMessage(String.format("Ninguem importante acabou de entrar no canal %s \uD83D\uDE12", chanelJoined)).tts(true).queue();
+            TTSChanel.sendMessage(String.format("Ninguem importante acabou de entrar no canal %s \uD83D\uDE12", chanelJoined)).tts(true).queue();
             return;
         }
 
-        general.sendMessage(String.format("%s acabou de entrar no canal %s \uD83E\uDD42",
+        TTSChanel.sendMessage(String.format("%s acabou de entrar no canal %s \uD83E\uDD42",
                 lastJoiner.getEffectiveName(), chanelJoined)).tts(true).queue();
 
     }
